@@ -12,7 +12,6 @@ export default class LicensesAddController {
         this.message = ""
     }
     save(){
-        console.log(this.licence);
         this.licenses.add(this.license,
             () => this.$state.go('app.licenses'),
             (message) => this.message = message )

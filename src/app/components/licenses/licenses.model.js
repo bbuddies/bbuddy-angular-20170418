@@ -1,7 +1,7 @@
 import {Inject} from '../../common/decorators'
 
 @Inject('api')
-export default class Accounts {
+export default class Licenses {
     constructor(api){
         this.api = api
     }
