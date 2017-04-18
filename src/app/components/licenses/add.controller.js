@@ -6,14 +6,15 @@ export default class LicensesAddController {
         this.licenses = licenses
         this.$state = $state
         this.license = {
-            name: '',
-            balance: 0
+            month: '2017-01',
+            amount: 1000
         }
         this.message = ""
     }
     save(){
+        console.log('1')
         this.licenses.add(this.license,
-            () => this.$state.go('app.licenses'),
+            () => this.$state.go('app.licenses.add'),
             (message) => this.message = message )
     }
 }

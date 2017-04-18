@@ -1,11 +1,11 @@
 import angular from 'angular'
 import LicensesAddController from './add.controller'
-import Licenses from './license.model'
+import Licenses from './licenses.model'
 
 function routing($stateProvider) {
     $stateProvider
         .state('app.licensesAdd', {
-            url: '/license',
+            url: '/licenses/add',
             component: 'licensesAdd',
             data:{
                 requireAuth: true
