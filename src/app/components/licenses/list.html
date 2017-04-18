@@ -1,18 +1,18 @@
 <div class="panel panel-primary">
-    <div class="panel-heading">Accounts</div>
+    <div class="panel-heading">Licenses</div>
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Account Name</th>
-            <th>Balance</th>
+            <th>Month</th>
+            <th>Amount</th>
         </tr>
         </thead>
         <tbody class="table-hover">
-        <tr ng-repeat="account in $ctrl.accounts">
-            <td class="text-left">{{account.name}}</td>
-            <td class="text-left">{{account.balance}}</td>
+        <tr ng-repeat="license in $ctrl.licenses">
+            <td class="text-left">{{license.month}}</td>
+            <td class="text-left">{{license.amount}}</td>
         </tr>
         </tbody>
     </table>
 </div>
-<a ui-sref="app.accountsAdd" class="btn btn-primary">Add</a>
+<a ui-sref="app.licensesAdd" class="btn btn-primary">Add</a>

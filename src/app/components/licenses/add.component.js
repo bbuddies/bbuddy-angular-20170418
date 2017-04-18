@@ -1,10 +1,10 @@
 import angular from 'angular'
 import LicensesAddController from './add.controller'
-import Licenses from './accounts.model'
+import Licenses from './licenses.model'
 
 function routing($stateProvider) {
     $stateProvider
-        .state('app.accountsAdd', {
+        .state('app.LicensesAdd', {
             url: '/licenses/add',
             component: 'licensesAdd',
             data:{
@@ -15,12 +15,12 @@ function routing($stateProvider) {
 routing.$inject = ['$stateProvider']
 
 export default angular
-    .module('accounts.add', [])
-    .component('accountsAdd', {
+    .module('licenses.add', [])
+    .component('licensesAdd', {
         template: require('./add.html'),
-        controller: AccountsAddController
+        controller: LicensesAddController
     })
-    .service('accountsModel', Accounts)
+    .service('licensesModel', Licenses)
     .config(routing)
     .name
 

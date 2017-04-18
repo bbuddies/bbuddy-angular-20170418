@@ -1,18 +1,18 @@
 import {Inject} from '../../common/decorators'
 
 @Inject('api')
-export default class Accounts {
+export default class Licenses{
     constructor(api){
         this.api = api
     }
     fetchAll(callback){
-        this.api.accounts.all(callback)
+        this.api.licenses.all(callback)
     }
-    add(account, success, failure){
-        if (account.name.trim().length == 0){
-            failure('Account name should not be empty!')
+    add(license, success, failure){
+        if (license.month.trim().length == 0 || license.amount.trim().length == 0){
+            failure('Month and amount should not be empty!')
             return
         }
-        this.api.accounts.add(account, success)
+        this.api.licenses.add(license, success)
     }
 }

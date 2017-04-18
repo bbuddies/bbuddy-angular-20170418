@@ -1,19 +1,19 @@
 import {Inject} from '../../common/decorators'
 
-@Inject('accountsModel', '$state')
-export default class AccountsAddController {
-    constructor(accounts, $state){
-        this.accounts = accounts
+@Inject('licensesModel', '$state')
+export default class LicensesAddController {
+    constructor(licenses, $state){
+        this.licenses = licenses 
         this.$state = $state
-        this.account = {
-            name: '',
-            balance: 0
+        this.license = {
+            month: '',
+            amount: 0
         }
         this.message = ""
     }
     save(){
-        this.accounts.add(this.account,
-            () => this.$state.go('app.accounts'),
+        this.licenses.add(this.license,
+            () => this.$state.go('app.licenses'),
             (message) => this.message = message )
     }
 }
