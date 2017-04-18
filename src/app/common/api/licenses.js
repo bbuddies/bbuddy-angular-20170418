@@ -7,6 +7,6 @@ export default class Licenses {
     }
     add(license, callback){
         console.log('yo')
-        this.http.post("license", license, callback)
+        this.http.post("licenses", license, callback)
     }
 }
