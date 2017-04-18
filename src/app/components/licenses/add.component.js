@@ -4,7 +4,7 @@ import Licenses from './licenses.model'
 
 function routing($stateProvider) {
     $stateProvider
-        .state('app.LicensesAdd', {
+        .state('app.licensesAdd', {
             url: '/licenses/add',
             component: 'licensesAdd',
             data:{

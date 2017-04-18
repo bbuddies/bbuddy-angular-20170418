@@ -3,6 +3,7 @@ import http from './http'
 import api from './api'
 import auth from './auth'
 import accounts from './accounts'
+import licenses from './licenses'
 import tokenAuth from 'ng-token-auth'
 
 export default angular
@@ -11,4 +12,5 @@ export default angular
     .service('api', api)
     .service('authApi', auth)
     .service('accountsApi', accounts)
+    .service('licensesApi', licenses)
     .name
