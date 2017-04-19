@@ -6,7 +6,9 @@ export default class Licenses {
         this.http = http
     }
     add(license, callback) {
-        //console.log('yo')
         this.http.post("licenses", license, callback)
+    }
+    getAll(callback) {
+        this.http.get("licenses", callback)
     }
 }

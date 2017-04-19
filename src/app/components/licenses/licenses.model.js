@@ -19,4 +19,7 @@ export default class Licenses {
 
         this.api.licenses.add(license, success)
     }
+    getAll(success, fail) {
+        this.api.licenses.getAll(success)
+    }
 }
