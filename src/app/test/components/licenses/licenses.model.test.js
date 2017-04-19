@@ -10,13 +10,10 @@ describe('licenses model', function() {
         success = sinon.spy()
         failure = sinon.spy()
     })
-    it('add an licenses successfully', function(done){
+    it('add an licenses successfully', function(){
         licenses.add(license, success, failure)
-        setTimeout(function () {
-          add.should.have.been.calledWith({month: '2017-04', amount: 100000})
-          success.should.have.been.called
-          done()
-        }, 1000)
+        add.should.have.been.calledWith({month: '2017-04', amount: 100000})
+        success.should.have.been.called
     })
 
     it('license month should not be empty when adding an license', function(){
@@ -25,7 +22,7 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License month or amount should not be empty!')
+        failure.should.have.been.calledWith('License month should not be empty!')
     })
     it('license month should not be filled with blanks when adding an license', function(){
         license.month = '  '
@@ -33,23 +30,44 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License month or amount should not be empty!')
+        failure.should.have.been.calledWith('License month should not be empty!')
     })
 
     it('license amount should not be empty when adding an license', function(){
-        license.month= ''
+        license.month= '2017-04'
+        license.amount= ''
 
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License month or amount should not be empty!')
+        failure.should.have.been.calledWith('License amount should not be empty!')
     })
     it('license amount should not be filled with blanks when adding an license', function(){
-        license.month = '  '
+        license.month= '2017-04'
+        license.amount= '  '
 
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License month or amount should not be empty!')
+        failure.should.have.been.calledWith('License amount should not be empty!')
+    })
+
+    it('license month should not be filled with correct format', function(){
+        license.month= '1000-aa'
+        license.amount= 1000
+
+        licenses.add(license, success, failure)
+
+        add.should.not.have.been.called
+        failure.should.have.been.calledWith('Please fill correct date EX:2017-02')
+    })
+    it('license month should not be filled with correct month', function(){
+        license.month= '1000-13'
+        license.amount= 1000
+
+        licenses.add(license, success, failure)
+
+        add.should.not.have.been.called
+        failure.should.have.been.calledWith('Please fill correct date EX:2017-02')
     })
 })
