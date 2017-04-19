@@ -25,7 +25,7 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License month should not be empty!')
+        failure.should.have.been.calledWith('invalid month format, must be "yyyy-mm". ')
     })
 
     it('license month should not be filled with blanks when adding an license', function(){
@@ -34,7 +34,7 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License month should not be empty!')
+        failure.should.have.been.calledWith('invalid month format, must be "yyyy-mm". ')
     })
 
     it('license amount should not be empty when adding an license', function(){
@@ -43,7 +43,7 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License amount should not be empty!')
+        failure.should.have.been.calledWith('amount must > 0. ')
     })
 
     it('license amount should not less than 0', function(){
@@ -52,7 +52,7 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License amount should not less than 0')
+        failure.should.have.been.calledWith('amount must > 0. ')
     })
 
     it('license amount should not be 0', function(){
@@ -61,6 +61,6 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License amount should not be 0')
+        failure.should.have.been.calledWith('amount must > 0. ')
     })
 })
