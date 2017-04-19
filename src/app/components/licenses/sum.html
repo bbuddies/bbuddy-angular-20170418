@@ -3,20 +3,20 @@
     <div>
         <label>Start</label>
         <input type="text" name="start_date" class="form-control"
-                ng-model="$ctrl.startMonth"/>
+                ng-model="$ctrl.startMonth" id="start_date_textfield"/>
     </div>
     <div>
         <label>End</label>
         <input type="text" name="end_date" class="form-control"
-                 ng-model="$ctrl.endMonth"/>
+                 ng-model="$ctrl.endMonth" id="end_date_textfield"/>
     </div>
     <hr/>
     <div>
-        <input type="submit" value="Calculated"
+        <input type="submit" value="Calculated" id="calculate_button"
                class="btn btn-lg btn-primary btn-block"/>
     </div>
 </form>
-<div>{{$ctrl.sum}}</div>
+<div id="total_amount_label">{{$ctrl.sum}}</div>
 <button ng-click="$ctrl.getLicenses()">getLicenses</button>
 <button ng-click="$ctrl.localCalculate()">localCalculate</button>
 <div>{{$ctrl.localSum}}</div>
