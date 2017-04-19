@@ -27,8 +27,8 @@ export default class Licenses {
         this.api.licenses.getAll(success)
     }
 
-    sum(startMonth, endMonth, success, fail) {
-        this.api.licenses.sum(startMonth, endMonth, success)
+    sum(startDate, endDate, success, fail) {
+        this.api.licenses.sum(startDate, endDate, success)
     }
 
     _sumInLocal(licenses, startDate, endDate) {
