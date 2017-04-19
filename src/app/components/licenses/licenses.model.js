@@ -34,8 +34,8 @@ export default class Licenses {
     _sumInLocal(licenses, startDate, endDate) {
         var startMonth = startDate.split('-').splice(0, 2).join('-')
         var endMonth = endDate.split('-').splice(0, 2).join('-')
-        var startDay = startDate.split('-')[2]
-        var endDay = endDate.split('-')[2]
+        var startDay = parseInt(startDate.split('-')[2])
+        var endDay = parseInt(endDate.split('-')[2])
         var totalAmount = 0
 
         if (startMonth === endMonth) {
@@ -48,11 +48,6 @@ export default class Licenses {
             return result.toFixed(2)
         }
 
-        var countDaysAmount = (date, month, monthAmount) => {
-            var totalDays = moment(month).daysInMonth()
-            return (totalDays - date + 1) * (monthAmount / totalDays)
-        }
-
         licenses.forEach(function(license){
             if(!moment(license.month + '-01').isBetween(startDate, endDate, 'Month', '[]')){
                 return;
@@ -60,11 +55,13 @@ export default class Licenses {
 
             if (license.month === startMonth) {
 
-                totalAmount += countDaysAmount(startDay, startMonth, license.amount)
+                var totalDays = moment(startMonth).daysInMonth()
+                totalAmount += (totalDays - startDay + 1) * (license.amount / totalDays)
 
             } else if (license.month === endMonth) {
 
-                totalAmount += countDaysAmount(endDay, endMonth, license.amount)
+                var totalDays = moment(endMonth).daysInMonth()
+                totalAmount += endDay * (license.amount / totalDays)
 
             } else {
 
