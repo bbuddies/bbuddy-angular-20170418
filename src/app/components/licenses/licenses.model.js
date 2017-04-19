@@ -32,33 +32,35 @@ export default class Licenses {
     }
 
     localCalculate(startDate, endDate, success, fail) {
-        this.api.licenses.getAll((licenses)=> {
-            var startMonth = startDate.split('-').splice(0, 2).join('-');
-            var endMonth = endDate.split('-').splice(0, 2).join('-');
-            var totalAmount = 0;
+        this.api.licenses.getAll((licenses) => {
+            var startMonth = startDate.split('-').splice(0, 2).join('-')
+            var endMonth = endDate.split('-').splice(0, 2).join('-')
+            var startDay = startDate.split('-')[2]
+            var endDay = endDate.split('-')[2]
+            var totalAmount = 0
 
-            var countDaysAmount = function (date, month, monthAmount) {
-                var totalDays = moment(month).daysInMonth();
-                return (totalDays - date + 1) * (monthAmount / totalDays);
+            var countDaysAmount = (date, month, monthAmount) => {
+                var totalDays = moment(month).daysInMonth()
+                return (totalDays - date + 1) * (monthAmount / totalDays)
             }
 
             licenses.forEach(function(license){
-                if (moment(license.month + '-01').isBetween(startDate, endDate, 'Month', '[]')){
+                if(moment(license.month + '-01').isBetween(startDate, endDate, 'Month', '[]')){
 
                     if (license.month === startMonth) {
 
-                        totalAmount += countDaysAmount(startDate.split('-')[2], startMonth, license.amount);
+                        totalAmount += countDaysAmount(startDay, startMonth, license.amount)
 
                     } else if (license.month === endMonth) {
 
-                        totalAmount += countDaysAmount(endDate.split('-')[2], endMonth, license.amount);
+                        totalAmount += countDaysAmount(endDay, endMonth, license.amount)
 
                     } else {
 
-                        totalAmount += license.amount;
+                        totalAmount += license.amount
                     }
                 }
-            });
+            })
             success(totalAmount)
         })
     }
