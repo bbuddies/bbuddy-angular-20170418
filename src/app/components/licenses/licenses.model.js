@@ -45,7 +45,7 @@ export default class Licenses {
             var totalDays = moment(licenses[index].month).daysInMonth()
             var amount = licenses[index].amount
             var result = (amount / totalDays) * (endDay - startDay + 1)
-            return success(result)
+            return result.toFixed(2)
         }
 
         var countDaysAmount = (date, month, monthAmount) => {
@@ -72,7 +72,7 @@ export default class Licenses {
             }
         })
 
-        return totalAmount
+        return totalAmount.toFixed(2)
     }
 
     localCalculate(startDate, endDate, success, fail) {
