@@ -16,16 +16,16 @@ describe('licenses model', function() {
           add.should.have.been.calledWith({month: '2017-04', amount: 100000})
           success.should.have.been.called
           done()
-        }, 2000)
+        }, 1000)
     })
 
-    it('license name should not be empty when adding an license', function(){
+    it('license month should not be empty when adding an license', function(){
         license.month= ''
 
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License name should not be empty!')
+        failure.should.have.been.calledWith('License month should not be empty!')
     })
     it('license month should not be filled with blanks when adding an license', function(){
         license.month = '  '
@@ -33,6 +33,22 @@ describe('licenses model', function() {
         licenses.add(license, success, failure)
 
         add.should.not.have.been.called
-        failure.should.have.been.calledWith('License name should not be empty!')
+        failure.should.have.been.calledWith('License month should not be empty!')
+    })
+    it('license amount should not be empty when adding an license', function(){
+        license.amount = ''
+
+        licenses.add(license, success, failure)
+
+        add.should.not.have.been.called
+        failure.should.have.been.calledWith('License amount should not be empty!')
+    })
+    it('license amount should not be filled with blanks when adding an license', function(){
+        license.month = '  '
+
+        licenses.add(license, success, failure)
+
+        add.should.not.have.been.called
+        failure.should.have.been.calledWith('License amount should not be empty!')
     })
 })

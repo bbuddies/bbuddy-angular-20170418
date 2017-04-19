@@ -9,7 +9,7 @@ export default class Licenses{
         this.api.licenses.all(callback)
     }
     add(license, success, failure){
-        if (license.month.trim().length == 0 || license.amount.trim().length == 0){
+        if (license.month.trim().length == 0 || license.amount.length == 0){
             failure('Month and amount should not be empty!')
             return
         }
