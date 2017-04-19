@@ -12,55 +12,59 @@ export default class Fees{
     fetchLicenseByFee(fee){
         let api = this.api
         return new Promise((resolve, reject) => {
-          api.licenses.all((res)=> {
-            resolve(res.data)
-          })
+            api.licenses.all((res)=> {
+                resolve(res.data)
+            })
         })
     }
+
+    // feeStartDate: xxxx-xx
+    licenseFee(feeStartDate, feeEndDate, license) {
+        const licenseMonth = new Date(license.month)
+        const startMonth = new Date(feeStartDate).setDate(1)
+        const endMonth = new Date(feeEndDate).setDate(1)
+        const days = new Date(licenseMonth.getFullYear(), licenseMonth.getMonth()+1, 0).getDate()
+        const startDate = new Date(feeStartDate).getTime()
+        const endDate = new Date(feeEndDate).getTime()
+        const licenseStartDate = licenseMonth.getTime()
+        const licenseEndDate = licenseMonth.setMonth(licenseMonth.getMonth()+1)
+
+        const amount = license.amount? license.amount : 0;
+        let feeDays = 0
+
+        // fee period in one month
+        if (startMonth == licenseStartDate && endMonth == licenseStartDate) {
+            feeDays = new Date(feeEndDate).getDate() - new Date(feeStartDate).getDate() + 1
+
+        // fee of first month
+        } else if (startMonth == licenseStartDate) {
+            feeDays = days - new Date(feeStartDate).getDate() + 1;
+
+        // fee of last month
+        } else if (endMonth == licenseStartDate) {
+            feeDays = new Date(feeEndDate).getDate();
+
+        // fee of full month
+        } else if (licenseStartDate >= startDate && licenseEndDate <= endDate) {
+            feeDays = days
+        }
+    
+        return Math.ceil(amount * feeDays/days)
+    }
+
     async charge(fee, success, failure){
         var timerange = {
-          start: '',
-          end: ''
+            start: '',
+            end: ''
         }
 
         try {
-          const licenses = await this.fetchLicenseByFee(fee)
-          timerange.start = new Date(fee.startdate)
-          timerange.end = new Date(fee.enddate)
+            const licenses = await this.fetchLicenseByFee(fee)
 
-          console.log(licenses)
-          const fees = licenses.map((el)=>{
-            const licenseStartDate = new Date(el.month)
-            const licenseEndMonth = new Date(el.month)
-            licenseEndMonth.setMonth(licenseStartDate.getMonth()+1, 1)
-
-            const monthPeriod = licenseEndMonth - licenseStartDate
-                console.log('licenseStartDate: ' + licenseStartDate)
-                console.log('timerange.start: ' + timerange.start)
-
-            if (licenseStartDate < timerange.start && licenseEndMonth > timerange.end) {
-                return el.amount * (timerange.end - timerange.start) / monthPeriod
-            }
-
-            if (licenseStartDate > timerange.start && licenseEndMonth > timerange.end) {
-                return el.amount * (timerange.end - licenseStartDate) / monthPeriod
-            }
-
-            if (licenseStartDate < timerange.start && licenseEndMonth < timerange.end) {
-                return el.amount * (licenseEndMonth - timerange.start) / monthPeriod
-            }
-
-            if (licenseStartDate >= timerange.start && licenseEndMonth < timerange.end) {
-                return el.amount
-            }
-
-            return 0
-          })
-
-          console.log(fees)
+            const fees = licenses.map((license) => this.licenseFee(fee.startdate, fee.enddate, license))
+            console.log(fees)
         } catch(e) {
-        
-          console.log(e)
+            console.log(e)
         }
     }
 }
