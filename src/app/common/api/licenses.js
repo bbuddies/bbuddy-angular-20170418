@@ -11,4 +11,10 @@ export default class Licenses {
     getAll(callback) {
         this.http.get("licenses", callback)
     }
+    sum(startMonth, endMonth, callback) {
+        this.http.get("fee", {
+            start_date: startMonth,
+            end_date: endMonth
+        }, callback)
+    }
 }

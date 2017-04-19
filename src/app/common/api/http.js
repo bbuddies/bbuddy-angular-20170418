@@ -20,8 +20,13 @@ export default class Http{
             this.notification.error(errorMessage)
         }
     }
-    get(path, callback) {
-        this.$http.get(this.url(path)).then(this.callbackWithResponseData(callback), this.errorHandler())
+    get(path, params, callback) {
+
+        //this.$http.get(this.url(path)).then(this.callbackWithResponseData(callback), this.errorHandler())
+        this.$http({
+            url: path,
+            params
+        }).then(this.callbackWithResponseData(callback), this.errorHandler())
     }
     post(path, data, config, callback){
         if (typeof config === 'function'){

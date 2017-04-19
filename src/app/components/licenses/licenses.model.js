@@ -5,6 +5,7 @@ export default class Licenses {
     constructor(api){
         this.api = api
     }
+
     add(license, success, failure){
 
         if(license.amount <= 0) {
@@ -19,7 +20,12 @@ export default class Licenses {
 
         this.api.licenses.add(license, success)
     }
+
     getAll(success, fail) {
         this.api.licenses.getAll(success)
+    }
+
+    sum(startMonth, endMonth, success, fail) {
+        this.api.licenses.sum(startMonth, endMonth, success)
     }
 }

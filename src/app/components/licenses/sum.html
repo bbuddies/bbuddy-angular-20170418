@@ -1,14 +1,14 @@
 <div>{{$ctrl.message}}</div>
-<form style="max-width: 330px;" method="get" ng-submit="$ctrl.save()">
+<form style="max-width: 330px;" method="get" ng-submit="$ctrl.calculate()">
     <div>
         <label>Start</label>
-        <input type="text" name="month" class="form-control"
-                ng-model="$ctrl.license.month"/>
+        <input type="text" name="start_date" class="form-control"
+                ng-model="$ctrl.startMonth"/>
     </div>
     <div>
         <label>End</label>
-        <input type="number" name="amount" class="form-control"
-                 ng-model="$ctrl.license.amount"/>
+        <input type="text" name="end_date" class="form-control"
+                 ng-model="$ctrl.endMonth"/>
     </div>
     <hr/>
     <div>
