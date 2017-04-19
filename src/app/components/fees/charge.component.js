@@ -4,7 +4,7 @@ import Fees from './fees.model'
 
 function routing($stateProvider) {
     $stateProvider
-        .state('app.feesCharge', {
+        .state('app.fees', {
             url: '/fees/charge',
             component: 'feesCharge',
             data:{
