@@ -9,13 +9,15 @@ export default class Licenses{
         this.api.licenses.all(callback)
     }
     add(license, success, failure){
-        var tempMonth = license.month
+        var tempDate = license.month
         var tempAmount = license.amount.toString()
-        var year = parseInt(tempMonth.split('-')[0]);
-        var month = parseInt(tempMonth.split('-')[1]);
+
+        var tempDateArray = tempDate.split('-');
+        var tempYear = parseInt(tempDateArray[0]);
+        var tempMonth = parseInt(tempDateArray[1]);
 
 
-        if (tempMonth.trim().length == 0){
+        if (tempDate.trim().length == 0){
             failure('License month should not be empty!')
             return
         }
@@ -30,7 +32,7 @@ export default class Licenses{
             return
         }
 
-        if (!year || !month || month > 12) {
+        if (!tempYear || !tempMonth|| tempMonth > 12) {
             failure('Please fill correct date EX:2017-02')
             return
         }
