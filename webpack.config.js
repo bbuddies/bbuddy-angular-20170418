@@ -10,7 +10,7 @@ module.exports = function(dev) {
         devtool: dev ? 'cheap-module-eval-source-map' : 'hidden-source-map',
         debug: dev,
         entry: {
-            app: './src/app/root'
+            app: ['babel-polyfill', './src/app/root']
         },
         devServer:{
             stats: {
