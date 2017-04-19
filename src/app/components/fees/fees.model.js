@@ -1,14 +1,9 @@
-require('babel-polyfill');
 import {Inject} from '../../common/decorators'
 
 @Inject('api')
 export default class Fees{
     constructor(api){
         this.api = api
-    }
-    fetchAll(callback){
-        //this.api.licenses.all(callback)
-        
     }
     fetchLicenseByFee(fee){
         let api = this.api
@@ -54,11 +49,6 @@ export default class Fees{
     }
 
     async charge(fee, success, failure){
-        var timerange = {
-            start: '',
-            end: ''
-        }
-
         try {
             const licenses = await this.fetchLicenseByFee(fee)
 
