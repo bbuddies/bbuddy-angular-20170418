@@ -14,6 +14,6 @@ export default class LicensesAddController {
     save(){
         this.licenses.add(this.license,
             () => this.$state.go('app.licenses'),
-            (message) => window.alert(message))
+            (message) => this.message = message)
     }
 }
