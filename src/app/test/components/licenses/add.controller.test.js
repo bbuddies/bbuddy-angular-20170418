@@ -21,8 +21,8 @@ describe('licenses add controller', function() {
 
     it('add an license failed', function(){
         add.callsArgWith(2, 'Error')
-        controller.account.month = ''
-        controller.account.amount = 0
+        controller.license.month = ''
+        controller.license.amount = 0
 
         controller.save()
 
