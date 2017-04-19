@@ -8,8 +8,10 @@ export default class LicensesSumController {
         this.message = ""
 
         this.sum = 0
-        this.startMonth = '2017-01'
-        this.endMonth = '2017-11'
+        this.startMonth = '2017-01-11'
+        this.endMonth = '2017-11-11'
+
+        this.localSum = 0
     }
 
     getLicenses() {
@@ -19,13 +21,22 @@ export default class LicensesSumController {
         )
     }
 
+    localCalculate() {
+        this.licenses.localCalculate(
+            this.startMonth,
+            this.endMonth,
+            (fee)=> {this.localSum = fee},
+            ()=> {}
+        )
+    }
+
     calculate() {
         this.licenses.sum(
             this.startMonth,
             this.endMonth,
             (res)=> {
                 console.log(res)
-                this.sum = res
+                this.sum = res.fee
             },
             (error)=> {console.error(error)}
         )
