@@ -1,14 +1,15 @@
 import {Inject} from '../../common/decorators'
 
 @Inject('api')
-export default class Licenses{
+export default class Fees{
     constructor(api){
         this.api = api
     }
     fetchAll(callback){
-        this.api.licenses.all(callback)
+        //this.api.licenses.all(callback)
     }
-    add(license, success, failure){
+    charge(license, success, failure){
+      /*
         let tempDate = license.month
         let tempAmount = license.amount.toString()
 
@@ -38,5 +39,6 @@ export default class Licenses{
         }
 
         this.api.licenses.add(license, success)
+      */
     }
 }
