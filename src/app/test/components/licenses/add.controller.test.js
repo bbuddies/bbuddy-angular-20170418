@@ -24,6 +24,8 @@ describe('licenses add controller', function() {
         controller.save();
 
         alert.should.have.been.called;
+        add.should.have.not.been.called;
+        go.should.have.not.been.called;
     })
 
     // it('add an account failed', function(){
