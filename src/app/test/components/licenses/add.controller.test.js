@@ -11,10 +11,22 @@ describe('licenses add controller', function() {
         controller.license.month = '2017-02'
         controller.license.amount = 500
     })
+
     it('add an license successfully', function(){
         controller.save()
 
         add.should.have.been.calledWith({month: '2017-02', amount: 500})
         go.should.have.been.calledWith('app.licenses.add')
+    })
+
+    it('add an license failed', function(){
+        add.callsArgWith(2, 'Error')
+        controller.account.month = ''
+        controller.account.amount = 0
+
+        controller.save()
+
+        add.should.have.been.calledWith({month: '', amount: 0})
+        controller.message = 'Error'
     })
 })
