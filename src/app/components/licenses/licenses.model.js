@@ -48,7 +48,7 @@ export default class Licenses {
             return result.toFixed(2)
         }
 
-        licenses.forEach(function(license){
+        licenses.forEach((license) => {
             if(!moment(license.month + '-01').isBetween(startDate, endDate, 'Month', '[]')){
                 return;
             }
