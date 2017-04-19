@@ -26,6 +26,10 @@ describe('licenses model', function() {
           amount: 200
         },
         {
+          month: '2017-03',
+          amount: 300
+        },
+        {
           month: '2017-06',
           amount: 500
         }
@@ -33,7 +37,7 @@ describe('licenses model', function() {
 
       var result = licensesModel._sumInLocal(licenses, '2017-01-03', '2017-05-30')
 
-      result.should.be.eql('187.10')
+      result.should.be.eql('487.10')
     })
 
     it('Verify cross years license period', function(){
