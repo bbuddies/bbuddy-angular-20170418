@@ -6,14 +6,19 @@ export default class LicensesAddController {
         this.licenses = licenses
         this.$state = $state
         this.query = {
-            starteDate: '',
-            endDate: '' 
+            startDate: '2017-02-10',
+            endDate: '2017-02-14' 
         }
         this.message = ""
     }
-    query(){
-        this.licenses.query(this.query,
-            () => {},
-            (message) => window.alert(message))
+    queryAmount(){
+        // get data from server
+        this.licenses.queryFromServer(this.query,
+            (amount) => this.message = amount,
+            (message) => this.message = message)
+        // local caculate
+        // this.licenses.query(this.query,
+        //     (amount) => this.message = amount,
+        //     (message) => this.message = message)
     }
 }
