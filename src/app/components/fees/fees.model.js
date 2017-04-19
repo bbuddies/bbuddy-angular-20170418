@@ -1,3 +1,4 @@
+require('babel-polyfill');
 import {Inject} from '../../common/decorators'
 
 @Inject('api')
