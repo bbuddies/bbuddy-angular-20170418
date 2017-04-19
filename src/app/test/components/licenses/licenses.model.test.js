@@ -35,20 +35,4 @@ describe('licenses model', function() {
         add.should.not.have.been.called
         failure.should.have.been.calledWith('License month should not be empty!')
     })
-    it('license amount should not be empty when adding an license', function(){
-        license.amount = ''
-
-        licenses.add(license, success, failure)
-
-        add.should.not.have.been.called
-        failure.should.have.been.calledWith('License amount should not be empty!')
-    })
-    it('license amount should not be filled with blanks when adding an license', function(){
-        license.month = '  '
-
-        licenses.add(license, success, failure)
-
-        add.should.not.have.been.called
-        failure.should.have.been.calledWith('License amount should not be empty!')
-    })
 })

@@ -9,8 +9,8 @@ export default class Licenses{
         this.api.licenses.all(callback)
     }
     add(license, success, failure){
-        if (license.month.trim().length == 0 || license.amount.length == 0){
-            failure('Month and amount should not be empty!')
+        if (license.month.trim().length == 0){
+            failure('License month should not be empty!')
             return
         }
         this.api.licenses.add(license, success)
