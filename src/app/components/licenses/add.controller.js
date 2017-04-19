@@ -12,13 +12,8 @@ export default class LicensesAddController {
         this.message = ""
     }
     save(){
-        const isInvalidAmount = this.license.amount < 0 || this.license.amount === 0;
-        if (isInvalidAmount) {
-            window.alert('yy');
-            return;
-        }
         this.licenses.add(this.license,
             () => this.$state.go('app.licenses'),
-            (message) => this.message = message )
+            (message) => window.alert(message))
     }
 }

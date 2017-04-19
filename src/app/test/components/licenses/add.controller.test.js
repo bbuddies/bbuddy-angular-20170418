@@ -19,14 +19,6 @@ describe('licenses add controller', function() {
         add.should.have.been.calledWith({month: '2017-03', amount: 100000})
         go.should.have.been.calledWith('app.licenses')
     })
-    it('set amount is 0 is invalid', function(){
-        controller.license.amount = 0;
-        controller.save();
-
-        alert.should.have.been.called;
-        add.should.have.not.been.called;
-        go.should.have.not.been.called;
-    })
 
     // it('add an account failed', function(){
     //     add.callsArgWith(2, 'Error')
