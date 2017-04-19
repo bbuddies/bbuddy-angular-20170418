@@ -4,7 +4,7 @@ import Fees from './fees.model'
 
 function routing($stateProvider) {
     $stateProvider
-        .state('app.fees', {
+        .state('app.feesCharge', {
             url: '/fees/charge',
             component: 'feesCharge',
             data:{
@@ -20,7 +20,7 @@ export default angular
         template: require('./charge.html'),
         controller: FeesChargeController
     })
-    .service('FeesModel', Fees)
+    .service('feesModel', Fees)
     .config(routing)
     .name
 

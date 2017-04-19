@@ -7,38 +7,28 @@ export default class Fees{
     }
     fetchAll(callback){
         //this.api.licenses.all(callback)
+        
     }
-    charge(license, success, failure){
-      /*
-        let tempDate = license.month
-        let tempAmount = license.amount.toString()
+    fetchLicenseByFee(fee){
+        let api = this.api
+        return new Promise((resolve, reject) => {
+        
+          api.licenses.all((licenses)=> {
+            resolve(licenses)
+          })
 
-        let tempDateArray = tempDate.split('-');
-        let tempYear = parseInt(tempDateArray[0]);
-        let tempMonth = parseInt(tempDateArray[1]);
-
-
-        if (tempDate.trim().length == 0){
-            failure('License month should not be empty!')
-            return
+        })
+    }
+    charge(fee, success, failure){
+        var timerange = []
+        function filterDate(el) {
+          timerange[el.month] = el.amount
         }
 
-        if (tempAmount.trim().length == 0){
-            failure('License amount should not be empty!')
-            return
-        }
+        this.fetchLicenseByFee(fee).then((licenses)=>{
+          licenses.data.map(filterDate)
+          console.log(timerange)
+        })
 
-        if (license.amount <= 0){
-            failure('License amount should be greater than zero!')
-            return
-        }
-
-        if (!tempYear || !tempMonth|| tempMonth > 12) {
-            failure('Please fill correct date EX:2017-02')
-            return
-        }
-
-        this.api.licenses.add(license, success)
-      */
     }
 }
