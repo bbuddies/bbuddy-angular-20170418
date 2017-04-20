@@ -13,7 +13,7 @@ export default class FeesChargeController {
     }
     charge(){
         this.fees.charge(this.fee,
-            () => this.$state.go('app.fees'),
+            (total) => this.total = total,
             (message) => this.message = message )
     }
 }
