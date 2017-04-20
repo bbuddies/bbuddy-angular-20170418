@@ -1,4 +1,6 @@
 import Licenses from '../../../components/licenses/licenses.model';
+import LicensesCtrl from '../../../components/licenses/sum.controller'
+var moment = require('moment')
 
 describe('licenses model', function() {
   var licensesModel;
@@ -56,20 +58,20 @@ describe('licenses model', function() {
       result.should.be.eql('967.74')
     })
 
-    it('Verify cross months with middle date license period', function(){
-      var licenses = [
-        {
-          month: '2017-02',
-          amount: 200
-        },
-        {
-          month: '2017-03',
-          amount: 500
-        }
-      ];
+    it('Verify leap year', function(){
+        var licenses = [
+            {
+                month: '2012-02',
+                amount: 200
+            },
+            {
+                month: '2012-03',
+                amount: 500
+            }
+        ];
 
-      var result = licensesModel._sumInLocal(licenses, '2017-02-15', '2017-03-30')
+        var result = licensesModel._sumInLocal(licenses, '2012-02-15', '2012-03-30')
 
-      result.should.be.eql('583.87')
+        result.should.be.eql('587.32')
     })
 })

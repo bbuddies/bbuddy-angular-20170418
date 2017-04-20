@@ -1,4 +1,5 @@
 import {Inject} from '../../common/decorators'
+var moment = require('moment')
 
 @Inject('licensesModel', '$state')
 export default class LicensesSumController {
@@ -11,6 +12,8 @@ export default class LicensesSumController {
         this.localSum = 0
         this.startDate = '2017-01-11'
         this.endDate = '2017-11-11'
+
+        this.nowTime = ''
     }
 
     getLicenses() {
@@ -39,5 +42,10 @@ export default class LicensesSumController {
             },
             (error)=> {console.error(error)}
         )
+    }
+
+    getNowTime(nowDate) {
+        var now = nowDate || new Date()
+        this.nowTime = moment(now).format('YYYY-MM-DD HH:mm:ss.SSS')
     }
 }
