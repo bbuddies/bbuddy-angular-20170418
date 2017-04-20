@@ -14,38 +14,31 @@ export default class Fees{
         })
     }
 
+    addZero(x, n) {
+        while (x.toString().length < n) {
+            x = "0" + x;
+        }
+        return x;
+    }
+
     // feeStartDate: xxxx-xx
     licenseFee(feeStartDate, feeEndDate, license) {
         const licenseMonth = new Date(license.month)
-        const startMonth = new Date(feeStartDate).setDate(1)
-        const endMonth = new Date(feeEndDate).setDate(1)
         const days = new Date(licenseMonth.getFullYear(), licenseMonth.getMonth()+1, 0).getDate()
-        const startDate = new Date(feeStartDate).getTime()
-        const endDate = new Date(feeEndDate).getTime()
-        const licenseStartDate = licenseMonth.getTime()
-        const licenseEndDate = licenseMonth.setMonth(licenseMonth.getMonth()+1)
+        const startDate = new Date(feeStartDate)
+        const endDate = new Date(feeEndDate)
+        const licenseStartDate = new Date(license.month)
+        const licenseEndDate = new Date(licenseMonth.setMonth(licenseMonth.getMonth()+1, 0))
 
-        const amount = license.amount? license.amount : 0;
-        let feeDays = 0
+        const maxStartDate = licenseStartDate > startDate? licenseStartDate: startDate
+        const minEndDate = licenseEndDate < endDate? licenseEndDate: endDate
 
-        // fee period in one month
-        if (startMonth == licenseStartDate && endMonth == licenseStartDate) {
-            feeDays = new Date(feeEndDate).getDate() - new Date(feeStartDate).getDate() + 1
-
-        // fee of first month
-        } else if (startMonth == licenseStartDate) {
-            feeDays = days - new Date(feeStartDate).getDate() + 1;
-
-        // fee of last month
-        } else if (endMonth == licenseStartDate) {
-            feeDays = new Date(feeEndDate).getDate();
-
-        // fee of full month
-        } else if (licenseStartDate >= startDate && licenseEndDate <= endDate) {
-            feeDays = days
+        if (maxStartDate > minEndDate) {
+            return 0
+        } else {
+            const feeDays = minEndDate.getDate() - maxStartDate.getDate() + 1
+            return Math.ceil(license.amount * feeDays/days)
         }
-    
-        return Math.ceil(amount * feeDays/days)
     }
 
     async charge(fee, success, failure){
