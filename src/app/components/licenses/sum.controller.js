@@ -24,7 +24,7 @@ export default class LicensesSumController {
         this.licenses.localCalculate(
             this.startDate,
             this.endDate,
-            (fee)=> {this.localSum = fee.toFixed(2)},
+            (fee)=> {this.localSum = fee},
             ()=> {}
         )
     }
