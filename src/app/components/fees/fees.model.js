@@ -5,20 +5,13 @@ export default class Fees{
     constructor(api){
         this.api = api
     }
-    fetchLicenseByFee(fee){
+    fetchLicense(){
         let api = this.api
         return new Promise((resolve, reject) => {
             api.licenses.all((res)=> {
                 resolve(res.data)
             })
         })
-    }
-
-    addZero(x, n) {
-        while (x.toString().length < n) {
-            x = "0" + x;
-        }
-        return x;
     }
 
     // feeStartDate: xxxx-xx
@@ -43,10 +36,10 @@ export default class Fees{
 
     async charge(fee, success, failure){
         try {
-            const licenses = await this.fetchLicenseByFee(fee)
-
+            const licenses = await this.fetchLicense()
             const fees = licenses.map((license) => this.licenseFee(fee.startdate, fee.enddate, license))
-            console.log(fees)
+            const total = fees.reduce(function (a, b) {return a + b}, 0) || 0
+            success(total)
         } catch(e) {
             console.log(e)
         }
